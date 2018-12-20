@@ -1,6 +1,6 @@
 <?php return [
     'plugin' => [
-        'name' => 'extendtools',
+        'name' => 'Extend Tools',
         'description' => 'Расширение основного функционала'
     ]
 ];

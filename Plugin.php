@@ -11,4 +11,14 @@ class Plugin extends PluginBase
     public function registerSettings()
     {
     }
+
+    public function registerFormWidgets()
+    {
+        return [
+            'Crydesign\Extendtools\FormWidgets\UniversalDatePicker' => [
+                'label' => 'Universal Date Picker',
+                'code' => 'udatepicker',
+            ],
+        ];
+    }
 }
