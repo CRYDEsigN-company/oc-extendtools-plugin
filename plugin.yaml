@@ -1,0 +1,6 @@
+plugin:
+    name: 'crydesign.extendtools::lang.plugin.name'
+    description: 'crydesign.extendtools::lang.plugin.description'
+    author: CRYDEsigN
+    icon: oc-icon-cogs
+    homepage: ''
