@@ -17,7 +17,11 @@ class Plugin extends PluginBase
         return [
             'Crydesign\Extendtools\FormWidgets\UniversalDatePicker' => [
                 'label' => 'Universal Date Picker',
-                'code' => 'udatepicker',
+                'code'  => 'udatepicker',
+            ],
+            'Crydesign\Extendtools\FormWidgets\UniversalTextField' => [
+                'label' => 'Universal Text Field',
+                'code'  => 'utext',
             ],
         ];
     }
