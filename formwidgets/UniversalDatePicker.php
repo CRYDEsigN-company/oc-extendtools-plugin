@@ -5,12 +5,14 @@ use Backend\Classes\FormWidgetBase;
 class UniversalDatePicker extends FormWidgetBase
 {
     // Получить локаль приложения и переключить языки
-    
+
+    const TIME_PREFIX = '___time_';
+
     public function widgetDetails()
     {
         return [
-            'name' => 'Multiselect',
-            'description' => 'Field for Multiselect'
+            'name' => 'Extend Tools',
+            'description' => 'Add new form widget to backend'
         ];
     }
 
@@ -40,13 +42,19 @@ class UniversalDatePicker extends FormWidgetBase
 
     public function getSaveValue($value)
     {
-        trace_log('cvcv'.input($this->getFieldName()));
+        if ($this->formField->disabled) {
+            return FormField::NO_SAVE_DATA;
+        }
+        if (!strlen($value)) {
+            return null;
+        }
+        $timeValue = post(self::TIME_PREFIX.$this->formField->getName(false));
+        if ($this->mode == 'datetime' && $timeValue) {
+            $value .= ' '.$timeValue.':00';
+        }
+        else if ($this->mode == 'time') {
+            $value = substr($value, 0, 5).':00';
+        }
         return $value;
     }
-    public function onSave()
-    {
-        console.log('cvcv!!!'.$value);
-        //throw new ValidationException(['name' => 'You must give a name!']);
-    }
-
 }
