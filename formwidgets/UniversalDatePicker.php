@@ -4,6 +4,8 @@ use Backend\Classes\FormWidgetBase;
 
 class UniversalDatePicker extends FormWidgetBase
 {
+    // Получить локаль приложения и переключить языки
+    
     public function widgetDetails()
     {
         return [
@@ -15,18 +17,36 @@ class UniversalDatePicker extends FormWidgetBase
     public function loadAssets()
     {
         $this->addCss([
-            'vue-datepicker-local.css'
+            'element-ui.css'
         ]);
         $this->addJs([
             'vue.min.js',
-            'vue-datepicker-local.js'
+            'element-ui.js',
+            'locale/en.js',
+            'locale/ru-RU.js'
         ]);
     }
 
     public function render(){
+        $this->prepareVars();
         return $this->makePartial('widget');
     }
 
     public function prepareVars(){
+        $this->vars['id'] = $this->getId();
+        $this->vars['name'] = $this->getFieldName();
+        $this->vars['value'] = $this->getLoadValue();
     }
+
+    public function getSaveValue($value)
+    {
+        trace_log('cvcv'.input($this->getFieldName()));
+        return $value;
+    }
+    public function onSave()
+    {
+        console.log('cvcv!!!'.$value);
+        //throw new ValidationException(['name' => 'You must give a name!']);
+    }
+
 }

@@ -1,36 +1,60 @@
 <!-- Universal Date Picker -->
 <div id="datepicker">
-    <vue-datepicker-local v-model="time" :local="local"></vue-datepicker-local>
+<el-row>
+  <el-date-picker
+    size="medium"
+    v-model="value"
+    value-format="yyyy-MM-dd"
+    :type="dateFormat"
+    :format="dateFormatFormat"
+    placeholder="Pick a day">
+    {{ value }}
+  </el-date-picker>
+  <el-radio-group v-model="dateFormat" size="medium">
+    <el-radio-button label="date">Date</el-radio-button>
+    <el-radio-button label="year">Year</el-radio-button>
+  </el-radio-group>
+</el-row>
+<input type="hidden" id="<?= $id ?>" name="<?= $name ?>" >
 </div>
 <!-- Universal Date Picker -->
 
 <script type="text/javascript">
-    new Vue({
-      el: '#datepicker',
-      data: {
-        time: new Date(),
-        range: [new Date(),new Date()],
-        emptyTime: '',
-        emptyRange: [],
-        local: {
-          dow: 0, // Sunday is the first day of the week
-          hourTip: 'Select Hour', // tip of select hour
-          minuteTip: 'Select Minute', // tip of select minute
-          secondTip: 'Select Second', // tip of select second
-          yearSuffix: '', // suffix of head year
-          monthsHead: 'January_February_March_April_May_June_July_August_September_October_November_December'.split('_'), // months of head
-          months: 'Jan_Feb_Mar_Apr_May_Jun_Jul_Aug_Sep_Oct_Nov_Dec'.split('_'), // months of panel
-          weeks: 'Su_Mo_Tu_We_Th_Fr_Sa'.split('_'), // weeks,
-          cancelTip: 'cancel',
-          submitTip: 'confirm'
-        }
-      },
-      methods: {
-        //disable the weekend
-        disabledDate (time) {
-          var day = time.getDay();
-          return day === 0 || day === 6;
-        }
+var  ElementUI = ELEMENT;
+ElementUI.locale(ElementUI.lang.ruRU)
+
+Vue.use(ElementUI);
+
+const DatePicker = new Vue({
+  el: '#datepicker',
+  data() {
+    return {
+      dateFormat: 'date',
+      dateFormatFormat: 'dd.MM.yyyy',
+      value: '',
+    };
+  },
+  mounted: function() {
+      this.value = '<?= $value ?>';
+      if (this.value.slice(5,10) == '00-00') {
+        this.dateFormat = 'year'
       }
-    })
+  },
+  watch: {
+    value: function(val) {
+      if (this.dateFormat == 'year') {
+        val = val.slice(0,4) + '-00-00';
+      }
+      $('#<?= $id ?>').val(val);
+    },
+    dateFormat: function(val) {
+      if (val == 'year') {
+        this.dateFormatFormat = 'yyyy';
+      } else {
+        this.dateFormatFormat = 'dd.MM.yyyy';
+      }
+    }
+  } 
+
+});
 </script>
