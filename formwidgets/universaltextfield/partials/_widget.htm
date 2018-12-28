@@ -1,6 +1,8 @@
 <!-- Universal Text Field -->
 <div id="<?= $app ?>">
-    <el-input placeholder="Please input" v-model="input"></el-input>
+    <el-input v-model="input" <? if($maxchar != '') { echo "maxlength=".$maxchar; } ?> >
+      <? if($maxchar != '') { echo '<template slot="append">{{ input.length }} / '.$maxchar.'</template>'; } ?> >
+    </el-input>
     <input type="hidden" id="<?= $id ?>" name="<?= $name ?>" v-model="input" >
 </div>
 <!-- Universal Text Field -->

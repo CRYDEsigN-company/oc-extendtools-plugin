@@ -8,6 +8,8 @@ class UniversalDatePicker extends FormWidgetBase
 
     const TIME_PREFIX = '___time_';
 
+    protected $defaultAlias = 'udatepicker';
+
     public function widgetDetails()
     {
         return [
