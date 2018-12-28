@@ -35,9 +35,7 @@ const <?= $app ?> = new Vue({
         this.value = '<?= $value ?>';
         if (this.value.slice(5,10) == '00-00') {
           this.value = this.value.slice(0,4) + '-01-01'
-          console.log(this.value)
           this.dateFormat = 'year'
-          
         }
     },
     watch: {
