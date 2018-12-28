@@ -1,5 +1,5 @@
 <!-- Universal Date Picker -->
-<div id="datepicker">
+<div id="<?= $app ?>">
 <el-row>
   <el-date-picker
     size="medium"
@@ -15,46 +15,41 @@
     <el-radio-button label="year">Year</el-radio-button>
   </el-radio-group>
 </el-row>
-<input type="hidden" id="<?= $id ?>" name="<?= $name ?>" >
+<input type="hidden" id="<?= $id ?>" name="<?= $name ?>" v-model="value">
 </div>
 <!-- Universal Date Picker -->
 
-<script type="text/javascript">
-var  ElementUI = ELEMENT;
-ElementUI.locale(ElementUI.lang.ruRU)
+<script>
 
-Vue.use(ElementUI);
-
-const DatePicker = new Vue({
-  el: '#datepicker',
-  data() {
-    return {
-      dateFormat: 'date',
-      dateFormatFormat: 'dd.MM.yyyy',
-      value: '',
-    };
-  },
-  mounted: function() {
-      this.value = '<?= $value ?>';
-      if (this.value.slice(5,10) == '00-00') {
-        this.dateFormat = 'year'
-      }
-  },
-  watch: {
-    value: function(val) {
-      if (this.dateFormat == 'year') {
-        val = val.slice(0,4) + '-00-00';
-      }
-      $('#<?= $id ?>').val(val);
+const <?= $app ?> = new Vue({
+    el: '#<?= $app ?>',
+    data() {
+      return {
+        dateFormat: 'date',
+        dateFormatFormat: 'dd.MM.yyyy',
+        value: '',
+      };
     },
-    dateFormat: function(val) {
-      if (val == 'year') {
-        this.dateFormatFormat = 'yyyy';
-      } else {
-        this.dateFormatFormat = 'dd.MM.yyyy';
+    mounted: function() {
+        this.value = '<?= $value ?>';
+        if (this.value.slice(5,10) == '00-00') {
+          this.dateFormat = 'year'
+        }
+    },
+    watch: {
+      value: function(val) {
+        if (this.dateFormat == 'year') {
+          this.value = this.value.slice(0,4) + '-00-00'
+        }
+      },
+      dateFormat: function(val) {
+        if (val == 'year') {
+          this.dateFormatFormat = 'yyyy';
+        } else {
+          this.dateFormatFormat = 'dd.MM.yyyy';
+        }
       }
-    }
-  } 
-
-});
-</script>
+    } 
+  
+  });
+  </script>

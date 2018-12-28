@@ -11,25 +11,13 @@ class UniversalDatePicker extends FormWidgetBase
     public function widgetDetails()
     {
         return [
-            'name' => 'Extend Tools',
+            'name' => 'Date picker',
             'description' => 'Add new form widget to backend'
         ];
     }
 
-    public function loadAssets()
-    {
-        $this->addCss([
-            'element-ui.css'
-        ]);
-        $this->addJs([
-            'vue.min.js',
-            'element-ui.js',
-            'locale/en.js',
-            'locale/ru-RU.js'
-        ]);
-    }
-
     public function render(){
+        
         $this->prepareVars();
         return $this->makePartial('widget');
     }
@@ -38,6 +26,7 @@ class UniversalDatePicker extends FormWidgetBase
         $this->vars['id'] = $this->getId();
         $this->vars['name'] = $this->getFieldName();
         $this->vars['value'] = $this->getLoadValue();
+        $this->vars['app'] = str_replace("-", "", $this->getId());
     }
 
     public function getSaveValue($value)
