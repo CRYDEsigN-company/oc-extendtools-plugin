@@ -39,13 +39,6 @@ class UniversalDatePicker extends FormWidgetBase
         if (!strlen($value)) {
             return null;
         }
-        $timeValue = post(self::TIME_PREFIX.$this->formField->getName(false));
-        if ($this->mode == 'datetime' && $timeValue) {
-            $value .= ' '.$timeValue.':00';
-        }
-        else if ($this->mode == 'time') {
-            $value = substr($value, 0, 5).':00';
-        }
         return $value;
     }
 }

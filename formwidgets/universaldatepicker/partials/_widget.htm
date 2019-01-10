@@ -15,7 +15,7 @@
     <el-radio-button label="year">Year</el-radio-button>
   </el-radio-group>
 </el-row>
-<input type="hidden" id="<?= $id ?>" name="<?= $name ?>" v-model="date">
+<input type="hidden" id="<?= $id ?>" name="<?= $name ?>" v-model="computed_date">
 </div>
 <!-- Universal Date Picker -->
 
@@ -33,19 +33,22 @@ const <?= $app ?> = new Vue({
     },
     mounted: function() {
         this.value = '<?= $value ?>';
-        if (this.value.slice(5,10) == '00-00') {
-          this.value = this.value.slice(0,4) + '-01-01'
+        if (this.value.length == 4) {
+          this.value = this.value + '-01-01'
           this.dateFormat = 'year'
         }
     },
-    watch: {
-      value: function(val) {
+    computed: {
+      computed_date: function() {
         if (this.dateFormat == 'year') {
-          this.date = val.slice(0,4) + '-00-00'
+          this.date = this.value.slice(0,4)
         } else {
-          this.date = val
+          this.date = this.value
         }
-      },
+        return this.date;
+      }
+    },
+    watch: {
       dateFormat: function(val) {
         if (val == 'year') {
           this.dateFormatFormat = 'yyyy';
