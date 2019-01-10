@@ -47,5 +47,35 @@ class Plugin extends PluginBase
                 '$/crydesign/extendtools/assets/css/element-ui.css',
             ]);
         });
+
+        Event::listen('pages.builder.registerControls', function ($controlLibrary) {
+
+            function addDatePicker($controlLibrary)
+            {
+                // Добавляем свойства
+
+                $properties = [
+                    'test' => [
+                        'title' => 'Title',
+                        'description' => 'Description',
+                        'type' => 'string',
+                    ],
+                ];
+
+                // Регистрируем формвиджет
+
+                $controlLibrary->registerControl(
+                    'udatepicker',
+                    'Universal Date Picker',
+                    'date picker with date and year select',
+                    'default',
+                    'icon-pencil-square',
+                    $controlLibrary->getStandardProperties(['stretch'], $properties),
+                    'CRYDEsigN\Extendtools\FormWidgets\UniversalDatePickerBuilder' // Указываем путь до своего формвиджета, в нашем случае это TestBuilder.php
+                );
+            }
+
+            addDatePicker($controlLibrary);
+        });
     }
 }
