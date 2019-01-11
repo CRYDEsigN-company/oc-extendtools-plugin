@@ -4,10 +4,6 @@ use Backend\Classes\FormWidgetBase;
 
 class UniversalDatePicker extends FormWidgetBase
 {
-    // Получить локаль приложения и переключить языки
-
-    const TIME_PREFIX = '___time_';
-
     protected $defaultAlias = 'udatepicker';
 
     public function widgetDetails()
