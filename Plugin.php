@@ -30,6 +30,14 @@ class Plugin extends PluginBase
                 'label' => 'Universal Text Field',
                 'code'  => 'utext',
             ],
+            'Crydesign\Extendtools\FormWidgets\WrapStart' => [
+                'label' => 'Wrap Start',
+                'code' => 'wrapstart',
+            ],
+            'Crydesign\Extendtools\FormWidgets\WrapEnd' => [
+                'label' => 'Wrap End',
+                'code' => 'wrapend',
+            ],
         ];
     }
 
